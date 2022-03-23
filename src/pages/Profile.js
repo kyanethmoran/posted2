@@ -1,4 +1,5 @@
 import React from 'react';
+import Posts from '../components/Posts';
 import ProfileDetails from '../components/ProfileDetails';
 
 function Profile(){
@@ -7,6 +8,9 @@ function Profile(){
         <div className='profile row'>
             <div>
                 <ProfileDetails />
+            </div>
+            <div>
+                <Posts />
             </div>
         </div>
     );

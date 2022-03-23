@@ -7,7 +7,6 @@ export default function ProfileDetails() {
     const [info, setInfo] = useState();
 
     let currentuser = window.sessionStorage.getItem('activeUser');
-    let userInfo ={};
 
     const dbURL = 'https://posted2-8df76-default-rtdb.firebaseio.com/'
     const jsonEXT = '.json'
@@ -19,10 +18,11 @@ export default function ProfileDetails() {
     function getInfo(){
         axios.get(dbURL+currentuser+jsonEXT).then(response =>{
                 setInfo(response.data);
+                console.log(info, 'hi');
                 setLoading(false);            
         })
     }
-    
+    console.log(info, 'hi2')
     if(isLoading){
         return <div>Loading...</div>
     }
@@ -38,7 +38,7 @@ export default function ProfileDetails() {
                     <span className="name mt-3">{info.firstName}</span> 
                     <span className="idd">@{info.userName}</span>
                     <div className="d-flex flex-row justify-content-center align-items-center mt-3"> 
-                        <span className="number">1069 <span class="follow">Followers</span></span> 
+                        <span className="number">1254<span class="follow">Followers</span></span> 
                     </div>
                     <div className=" d-flex mt-2"> 
                         <button className="btn1 btn-dark">Edit Profile</button> 
