@@ -1,7 +1,7 @@
-import React from 'react';
-// import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../components/LoginForm.css';
-// import axios from axios;
+import axios from 'axios';
 
 
 
@@ -12,13 +12,33 @@ import '../components/LoginForm.css';
 
 
 function Login(){
-    // let users ;
-    // const navigate = useNavigate;
+    const navigate = useNavigate();
+    let users ;
+    
+    const dbURL = 'https://posted2-8df76-default-rtdb.firebaseio.com/'
+    const jsonEXT = '.json'
+
+    useEffect(()=>{
+        axios.get(dbURL+jsonEXT).then(response =>{
+            users = Object.keys(response.data)
+            console.log(users, 'hook works')
+            console.log('success')
+        })
+    }, [])
 
     const signOn = (e)=>{
         e.preventDefault();
         let username = e.target.username.value;
         console.log(username, 'user input username');
+        users.forEach(element => {
+            console.log(element ,'each user logged')
+        });
+        if (users.includes(username)){
+            window.sessionStorage.setItem('activeUser', username)
+            navigate('/Home')
+        } else {
+            alert('please enter valid information')
+        }
     }
 
 
